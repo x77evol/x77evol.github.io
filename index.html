@@ -13737,77 +13737,77 @@ settings.fontFile = null;
                         <label>响应延迟 (毫秒)</label>
                         <input type="number" id="private-chat-delay" value="${settings.responseDelay}">
                     </div>
-按钮类=“格式”，点击=“保存隐私设置”
-</div>
+                    <button class="form-btn" onclick="savePrivateChatSettings()">保存</button>
+                </div>
             `;
-document.getElementById（'私人聊天启用'）onchange = （e） => {
-appData.settings.privateChat.enabled = e.target.checked；
-saveData（true）；
+            document.getElementById('private-chat-enabled').onchange = (e) => {
+                appData.settings.privateChat.enabled = e.target.checked;
+                saveData(true);
             };
         }
 
-函数 savePrivateChatSettings（） {
-appData.settings.privateChat.triggerKeywords = document.getElementById（'private-chat-keywords'） 的值；
-appData.settings.privateChat.responseDelay = parseInt（document.getElementById（'private-chat-delay'）.value）；
-saveData（true）；
+        function savePrivateChatSettings() {
+            appData.settings.privateChat.triggerKeywords = document.getElementById('private-chat-keywords').value;
+            appData.settings.privateChat.responseDelay = parseInt(document.getElementById('private-chat-delay').value);
+            saveData(true);
         }
         
         // ★★★ 优化：已读回执设置 ★★★
-函数 renderReadReceiptSettingsPage（container） {
-如果（！container）返回；
-常量settings = appData.settings.beautify.readReceipt；
-container.innerHTML = `
-<div class="微信头像">
-<div class="header-left header-back-btn" onclick="goBack（）"><div class="ui-icon back"></div></div>
-<span类=“标题标题”>已读回执</span>
-</div>
-<div class="content-area">
-<div class="list-item">
+        function renderReadReceiptSettingsPage(container) {
+            if (!container) return;
+            const settings = appData.settings.beautify.readReceipt;
+            container.innerHTML = `
+                <div class="wechat-header">
+                    <div class="header-left header-back-btn" onclick="goBack()"><div class="ui-icon back"></div></div>
+                    <span class="header-title">已读回执</span>
+                </div>
+                <div class="content-area">
+                    <div class="list-item">
                         <div class="details"><span class="name">开启已读回执总开关</span></div>
-<label class="switch"><input type="checkbox" id="read-receipt-enabled" ${settings.enabled？'checked':''}><span class="slider"></span></label>
-</div>
-<div class="list-divider"></div>
-<div class="list-item">
-显示你的已读状态</span><p class="潜台词">对方将看到你是否已读消息</p></div>
+                        <label class="switch"><input type="checkbox" id="read-receipt-enabled" ${settings.enabled ? 'checked' : ''}><span class="slider"></span></label>
+                    </div>
+                    <div class="list-divider"></div>
+                    <div class="list-item">
+                        <div class="details"><span class="name">显示你的已读状态</span><p class="subtext">对方将看到你是否已读消息</p></div>
                         <label class="switch"><input type="checkbox" id="read-receipt-user-enabled" ${settings.userEnabled ? 'checked' : ''}><span class="slider"></span></label>
                     </div>
-<div class="list-item">
-显示对方的已读状态</span><p class="潜台词">你将看到对方是否已读消息</p></div>
-<label class="switch"><input type="checkbox" id="read-receipt-char-enabled" ${settings.charEnabled？'checked':''}><span class="slider"></span></label>
-</div>
-<div class="list-divider"></div>
-<div class="list-item" onclick="setReadReceiptPosition（'outside'）">
-气泡外的气泡外的气泡外的气泡外
-${settings.position === '外部'？'<i class="fas fa-check" style="color: var（--微信-绿色）；"></i>':''}
-</div>
-<div class="list-item" onclick="setReadReceiptPosition（'inside'）">
-气泡内的气泡内
-${settings.position === 'inside'？'<i class="fas fa-check" style="color: var（--微信-绿色）；"></i>':''}
-</div>
-</div>
+                    <div class="list-item">
+                        <div class="details"><span class="name">显示对方的已读状态</span><p class="subtext">你将看到对方是否已读消息</p></div>
+                        <label class="switch"><input type="checkbox" id="read-receipt-char-enabled" ${settings.charEnabled ? 'checked' : ''}><span class="slider"></span></label>
+                    </div>
+                    <div class="list-divider"></div>
+                    <div class="list-item" onclick="setReadReceiptPosition('outside')">
+                        <div class="details"><span class="name">气泡外</span></div>
+                        ${settings.position === 'outside' ? '<i class="fas fa-check" style="color: var(--wechat-green);"></i>' : ''}
+                    </div>
+                    <div class="list-item" onclick="setReadReceiptPosition('inside')">
+                        <div class="details"><span class="name">气泡内</span></div>
+                        ${settings.position === 'inside' ? '<i class="fas fa-check" style="color: var(--wechat-green);"></i>' : ''}
+                    </div>
+                </div>
             `;
-document.getElementById（'读取接收启用'）onchange = （e） => {
-设置.启用 = e.target.checked；
-saveData（true）；
+            document.getElementById('read-receipt-enabled').onchange = (e) => {
+                settings.enabled = e.target.checked;
+                saveData(true);
             };
-document.getElementById（'读取收据用户启用'）onchange = （e） => {
-settings.userEnabled = e.target.checked；
-saveData（true）；
+            document.getElementById('read-receipt-user-enabled').onchange = (e) => {
+                settings.userEnabled = e.target.checked;
+                saveData(true);
             };
-document.getElementById（'read-receipt-char-supported'）onchange = （e） => {
-settings.charEnabled = e.target.checked；
-saveData（true）；
+            document.getElementById('read-receipt-char-enabled').onchange = (e) => {
+                settings.charEnabled = e.target.checked;
+                saveData(true);
             };
         }
 
-函数 setReadReceiptPosition（位置） {
-appData.settings.beautify.readReceipt.position = position；
-saveData（true）；
-renderRead Receit SettingsPage（document.getElementById（'read-receipt-settings-page'））；
+        function setReadReceiptPosition(position) {
+            appData.settings.beautify.readReceipt.position = position;
+            saveData(true);
+            renderReadReceiptSettingsPage(document.getElementById('read-receipt-settings-page'));
         }
 
-</script>
-<！--新日历应用程序的FullCalendar JS -->
-<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
+    </script>
+    <!-- FullCalendar JS for the new Calendar App -->
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
 </body>
 </html>
